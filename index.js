@@ -42,6 +42,7 @@ let jsonFile = [
 
 app.get('/cars', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
+    res.header('Access-Control-Allow-Origin', '*');
 
     var id = req.param('id');
 
