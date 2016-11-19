@@ -42,7 +42,26 @@ let jsonFile = [
 
 app.get('/cars', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
-    res.send(jsonFile);
+
+    var id = req.param('id');
+
+    if(id == null){
+        res.send(jsonFile);
+    }
+
+    if(id < 0){
+        res.send({'error':'Invalid ID'});
+        return;
+    }
+    
+    for(var count = 0; count < jsonFile.length; count++){
+        if(jsonFile[count].id == id){
+            res.send(jsonFile[count]);
+            return;
+        }
+    }
+
+    res.send({'error':'Object not found!'});
 })
 
 app.get('/', function (req, res) {
